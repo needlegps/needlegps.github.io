@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+<!-- NeedleGPS marketing site.
+     Type: Manrope (display + body, wayfinding-style) + JetBrains Mono.
+     Palette: clinical navy / cyan-teal / cobalt / coral.
+     Animations: hero particle cloud + scroll-pinned Blender exploded view.
+     The earlier v1 (Inter-only) is preserved at /website-legacy/ for diff.
+-->
+
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'self';
+               script-src 'self' 'unsafe-inline';
+               style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+               font-src 'self' https://fonts.gstatic.com data:;
+               img-src 'self' data:;
+               connect-src 'self';
+               frame-ancestors 'none';
+               base-uri 'self';
+               form-action 'self';
+               object-src 'none';
+               upgrade-insecure-requests;" />
+<meta http-equiv="X-Content-Type-Options" content="nosniff" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<meta name="color-scheme" content="light dark" />
+
+<title>NeedleGPS · Gold Standard Navigation for CT-Guided Interventions</title>
+<meta name="description" content="NeedleGPS is a handheld navigation device for CT-guided needle procedures. Faster, more accurate insertions with fewer reinsertions and complications." />
+
+<meta property="og:title" content="NeedleGPS · Gold Standard Navigation for CT-Guided Interventions" />
+<meta property="og:description" content="Handheld targeting device, sterile single-use consumable, and planning software for CT-guided needle procedures." />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css?v=20260519-i" />
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="NeedleGPS home">
+      <!-- Brand mark: the official NeedleGPS logomark fetched from the
+           organization's GitHub profile avatar (github.com/needlegps).
+           A syringe-on-target glyph at 460×460 PNG. -->
+      <img class="brand-img" src="assets/logos/needlegps-mark.png" alt="" width="36" height="36" />
+      <span class="brand-name">NeedleGPS</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#top">Home</a>
+      <a href="#history">History</a>
+      <a href="#team">Team</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="nav-cta">Request a demo</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-overlay">
+      <div class="wrap hero-inner">
+        <div class="eyebrow hero-eyebrow">
+          <span class="eyebrow-stop"></span>
+          CT-GUIDED INTERVENTIONAL NAVIGATION
+        </div>
+        <h1>
+          Gold-standard navigation
+          <br/>for the needle <span class="accent">in your hand.</span>
+        </h1>
+        <p class="lede">
+          NeedleGPS is a handheld targeting device, a sterile single-use
+          consumable, and planning software. Together they guide the clinician
+          to the correct angle on the first pass.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#contact">
+            Request a demo
+            <span class="btn-arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="btn btn-ghost" href="#inside">See how it works</a>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">
+      <span class="scroll-tick"></span>
+      SCROLL
+    </div>
+
+    <!-- Live angle readout. The values are driven by the same theta/psi
+         oscillation that tilts the 3D device particle cloud, so the HUD
+         numbers and the on-screen device motion stay in sync. -->
+    <div class="angle-hud" aria-hidden="true">
+      <div class="hud-row">
+        <span class="hud-label">&theta;</span>
+        <span class="hud-value" id="hud-theta">+00.0&deg;</span>
+      </div>
+      <div class="hud-row">
+        <span class="hud-label">&psi;</span>
+        <span class="hud-value" id="hud-psi">+00.0&deg;</span>
+      </div>
+      <div class="hud-foot">ENTRY ANGLE · LIVE</div>
+    </div>
+
+    <div class="hero-fade" aria-hidden="true"></div>
+  </section>
+
+  <section class="marquee" aria-label="Affiliations and funding">
+    <div class="marquee-eyebrow">
+      <span class="eyebrow" style="margin:0">IN COLLABORATION WITH</span>
+    </div>
+    <div class="marquee-track" aria-hidden="true">
+      <ul class="marquee-row">
+        <li class="logo"><img src="assets/logos/ucsf.svg" alt=""><span>UCSF</span></li>
+        <li class="logo"><img src="assets/logos/harvard-medical-school.svg" alt=""><span>Harvard Medical School</span></li>
+        <li class="logo"><img src="assets/logos/mgh.svg" alt=""><span>Mass General Hospital</span></li>
+        <li class="logo"><img src="assets/logos/mit.svg" alt=""><span>MIT</span></li>
+        <li class="logo"><img src="assets/logos/uc-berkeley.svg" alt=""><span>UC Berkeley</span></li>
+        <li class="logo"><img src="assets/logos/nsf-icorps.svg" alt=""><span>NSF&nbsp;I-Corps</span></li>
+      </ul>
+      <ul class="marquee-row" aria-hidden="true">
+        <li class="logo"><img src="assets/logos/ucsf.svg" alt=""><span>UCSF</span></li>
+        <li class="logo"><img src="assets/logos/harvard-medical-school.svg" alt=""><span>Harvard Medical School</span></li>
+        <li class="logo"><img src="assets/logos/mgh.svg" alt=""><span>Mass General Hospital</span></li>
+        <li class="logo"><img src="assets/logos/mit.svg" alt=""><span>MIT</span></li>
+        <li class="logo"><img src="assets/logos/uc-berkeley.svg" alt=""><span>UC Berkeley</span></li>
+        <li class="logo"><img src="assets/logos/nsf-icorps.svg" alt=""><span>NSF&nbsp;I-Corps</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="wrap">
+      <div class="section-head center">
+        <div class="eyebrow eyebrow-dark">
+          <span class="eyebrow-stop"></span>
+          THE PROBLEM
+        </div>
+        <h2>Trajectories are planned in 3D.<br/>Today they are executed by hand.</h2>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-num"><span class="num">15,000</span><span class="unit">/ day</span></div>
+          <div class="stat-rule" aria-hidden="true"></div>
+          <div class="stat-label">CT-guided procedures performed every U.S. workday.</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num"><span class="num">75</span><span class="unit">%</span></div>
+          <div class="stat-rule" aria-hidden="true"></div>
+          <div class="stat-label">of unassisted insertions miss a 10&nbsp;mm target at depth.</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num"><span class="num">&gt; 10</span><span class="unit">%</span></div>
+          <div class="stat-rule" aria-hidden="true"></div>
+          <div class="stat-label">complication rate in complex cases, driven by needle reinsertions.</div>
+        </div>
+      </div>
+
+      <p class="problem-copy">
+        The angle the radiologist actually achieves rarely matches the angle
+        they drew on the screen. Each reinsertion adds time, radiation, and
+        the chance of a pneumothorax, bleed, or non-diagnostic biopsy.
+      </p>
+    </div>
+  </section>
+
+  <section id="technology" class="section section-soft">
+    <div class="wrap">
+      <div class="section-head center">
+        <div class="eyebrow">
+          <span class="eyebrow-stop"></span>
+          THE SYSTEM
+        </div>
+        <h2>A bubble level, re-engineered for the CT suite.</h2>
+        <p class="section-sub">
+          Three components. One workflow. The device receives a target angle
+          from the CT planning software or accepts one tapped in by hand, then
+          guides the clinician to that angle with visual and haptic feedback
+          in real time.
+        </p>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card">
+          <div class="card-route">
+            <span class="card-stop"></span>
+            <span class="card-line"></span>
+          </div>
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="12" y1="3" x2="12" y2="21"/><circle cx="12" cy="12" r="2"/></svg>
+          </div>
+          <div class="card-num">01 / SOFTWARE</div>
+          <h3>Vendor-agnostic planning</h3>
+          <p>
+            Reads DICOM from any CT scanner. Pick entry and target;
+            NeedleGPS computes the precise insertion angle.
+          </p>
+        </article>
+
+        <article class="tech-card">
+          <div class="card-route">
+            <span class="card-stop"></span>
+            <span class="card-line"></span>
+          </div>
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><line x1="12" y1="3" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="21"/></svg>
+          </div>
+          <div class="card-num">02 / DEVICE</div>
+          <h3>Handheld bubble-level guidance</h3>
+          <p>
+            Reusable, palm-sized. The screen guides the clinician to the
+            correct entry angle. Haptics confirm alignment before insertion.
+          </p>
+        </article>
+
+        <article class="tech-card">
+          <div class="card-route">
+            <span class="card-stop"></span>
+            <span class="card-line"></span>
+          </div>
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8c0-2 2-4 8-4s8 2 8 4-2 4-8 4-8-2-8-4z"/><line x1="12" y1="12" x2="12" y2="22"/><line x1="9" y1="22" x2="15" y2="22"/></svg>
+          </div>
+          <div class="card-num">03 / CONSUMABLE</div>
+          <h3>Sterile single-use shield</h3>
+          <p>
+            A precision needle-guide interface in a sterile shell. Snaps on,
+            keeps the field sterile, detaches once the angle is set.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="inside" class="blowup">
+    <div class="blowup-sticky">
+      <canvas id="blowup-canvas" aria-hidden="true"></canvas>
+      <!-- When the Blender render sequence is ready (renders/manifest.json),
+           v2 will swap to drawing the PNG sequence keyed to scroll. Until
+           then it falls back to the same particle blowup as v1. -->
+      <img id="blowup-render" alt="" aria-hidden="true" hidden />
+
+      <div class="blowup-head">
+        <div class="eyebrow">
+          <span class="eyebrow-stop"></span>
+          INSIDE THE DEVICE
+        </div>
+        <h2>Run the teardown sequence.</h2>
+        <p>
+          Reusable electronics. Sterile consumable. Single guidance needle.
+          Each subsystem engineered for a clean handoff during the procedure.
+        </p>
+      </div>
+
+      <div class="blowup-labels" aria-hidden="true">
+        <div class="b-label right" data-part="display">
+          <span class="b-dot"></span>
+          <span class="b-rule"></span>
+          <span class="b-text">OLED bubble-level display</span>
+        </div>
+        <div class="b-label left" data-part="antenna">
+          <span class="b-text">Wi-Fi / BLE antenna ring</span>
+          <span class="b-rule"></span>
+          <span class="b-dot"></span>
+        </div>
+        <div class="b-label right" data-part="pcb">
+          <span class="b-dot"></span>
+          <span class="b-rule"></span>
+          <span class="b-text">IMU + ESP32 wireless module</span>
+        </div>
+        <div class="b-label left" data-part="battery">
+          <span class="b-text">Battery cell</span>
+          <span class="b-rule"></span>
+          <span class="b-dot"></span>
+        </div>
+        <div class="b-label right" data-part="camlock">
+          <span class="b-dot"></span>
+          <span class="b-rule"></span>
+          <span class="b-text">Cam-lock interface</span>
+        </div>
+        <div class="b-label left" data-part="shield">
+          <span class="b-text">Sterile single-use shield</span>
+          <span class="b-rule"></span>
+          <span class="b-dot"></span>
+        </div>
+        <div class="b-label right" data-part="needle">
+          <span class="b-dot"></span>
+          <span class="b-rule"></span>
+          <span class="b-text">Coaxial guidance needle</span>
+        </div>
+      </div>
+
+      <div class="blowup-progress" aria-hidden="true">
+        <span>ASSEMBLED</span>
+        <div class="blowup-bar"><span id="blowup-bar-fill"></span></div>
+        <span>EXPLODED</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="data" class="section section-light">
+    <div class="wrap">
+      <div class="section-head center">
+        <div class="eyebrow eyebrow-dark">
+          <span class="eyebrow-stop"></span>
+          PROTOTYPE EVIDENCE
+        </div>
+        <h2>Measured, not estimated.</h2>
+        <p class="section-sub">
+          Phantom insertion study. Experienced operators. Unassisted standard
+          of care versus NeedleGPS-assisted.
+        </p>
+      </div>
+
+      <div class="data-grid">
+        <div class="data-card">
+          <div class="data-num"><span class="num">25%</span> <span class="arrow">→</span> <span class="num">90%</span></div>
+          <div class="data-label">of insertions within 5° of the planned angle.</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num"><span class="num">7×</span></div>
+          <div class="data-label">reduction in needle reinsertions per procedure.</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num"><span class="num">45%</span></div>
+          <div class="data-label">faster in the toughest cases.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="history" class="section section-light">
+    <div class="wrap section-head center" style="margin-bottom:0">
+      <div class="eyebrow eyebrow-dark">
+        <span class="eyebrow-stop"></span>
+        HISTORY
+      </div>
+      <h2>Built from a UCSF interventional-radiology problem.</h2>
+      <p class="section-sub" style="margin-top:18px; max-width:680px; margin-left:auto; margin-right:auto;">
+        The team started with a single question: why do up to 1 in 5
+        CT-guided lung biopsies fail on the first pass? After hundreds of
+        clinician interviews and four prototype generations through the
+        UCSF Makers Lab, NSF I-Corps, and UCSF Innovation Ventures,
+        NeedleGPS emerged as the simplest interface between a planning
+        workstation and a clinician's hand. The company is now pre-seed
+        with a working prototype and a prepared FDA pre-submission package.
+      </p>
+    </div>
+  </section>
+
+  <section id="team" class="section section-soft">
+    <div class="wrap team-block">
+      <div class="eyebrow eyebrow-dark" style="justify-content:center">
+        <span class="eyebrow-stop"></span>
+        TEAM
+      </div>
+      <h2 style="text-align:center; margin: 12px 0 28px;">Built by operators and interventional clinicians.</h2>
+      <p class="team-copy">
+        NeedleGPS is led by
+        <a class="team-link"
+           href="https://www.linkedin.com/in/cristian-ionescu-zanetti-3b90647/"
+           target="_blank" rel="noopener noreferrer"><strong>Cristian&nbsp;Ionescu-Zanetti</strong></a>
+        (CEO, prior founder and VP Product of a public diagnostics company)
+        and <strong>Alan&nbsp;Czeszynski</strong> (CTO, multiple medical
+        devices from 510(k) through commercial launch). Our clinician
+        founders are practicing interventional radiologists and
+        neuroradiologists at UCSF, with PhD training in physics and
+        engineering at UC Berkeley, UC Santa Cruz, and MIT-affiliated
+        programs. In addition to UCSF Radiology, current clinical
+        development is being run by
+        <a class="team-link"
+           href="https://www.cntr.mgh.harvard.edu/our-team/peter-hadar,-md,-ms"
+           target="_blank" rel="noopener noreferrer"><strong>Dr.&nbsp;Peter&nbsp;Hadar</strong></a>,
+        Department of Neurology, Massachusetts General Hospital.
+      </p>
+      <div class="team-affiliations">
+        <span>UCSF</span>
+        <span>Harvard Medical School / MGH</span>
+        <span>MIT</span>
+        <span>UC Berkeley</span>
+        <span>NSF I-Corps</span>
+        <span>UCSF Innovation Ventures</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section section-light">
+    <div class="wrap">
+      <div class="section-head center">
+        <div class="eyebrow eyebrow-dark">
+          <span class="eyebrow-stop"></span>
+          FAQ
+        </div>
+        <h2>Common questions.</h2>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-card">
+          <h3>What is NeedleGPS?</h3>
+          <p>
+            A handheld targeting device, a sterile single-use consumable,
+            and planning software that work together to guide the clinician
+            to the correct angle on the first pass during CT-guided needle
+            procedures such as biopsies, ablations, and injections.
+          </p>
+        </div>
+        <div class="faq-card">
+          <h3>Which CT scanners does it work with?</h3>
+          <p>
+            The planning software is designed to be vendor-agnostic and
+            reads DICOM from any CT manufacturer. The handheld device
+            receives the target angle wirelessly or accepts manual entry.
+          </p>
+        </div>
+        <div class="faq-card">
+          <h3>What is the consumable?</h3>
+          <p>
+            A single-use sterile shield with a precision needle-guide
+            interface. It snaps onto the reusable handheld, keeps the field
+            sterile, and detaches once the angle is set.
+          </p>
+        </div>
+        <div class="faq-card">
+          <h3>Is it FDA-cleared today?</h3>
+          <p>
+            NeedleGPS is currently an investigational device. Limited by
+            United States law to investigational use. Not yet for sale.
+            More information will be shared as we progress through early
+            human testing.
+          </p>
+        </div>
+        <div class="faq-card">
+          <h3>Has it been tested?</h3>
+          <p>
+            Prototype testing has been conducted in bench and phantom
+            settings with experienced operators. Early human testing is
+            planned. Peer-reviewed publications will follow as the
+            programme progresses.
+          </p>
+        </div>
+        <div class="faq-card">
+          <h3>Where can I find the IP?</h3>
+          <p>
+            A US patent application listing the founding team as inventors
+            is pending. Once published, it will be searchable on
+            <a class="team-link" target="_blank" rel="noopener noreferrer"
+               href="https://patents.google.com/?inventor=Lohith+Kini,Brian+Haas&amp;assignee=NeedleGPS">Google&nbsp;Patents</a>.
+            More information will be shared as the programme progresses.
+          </p>
+        </div>
+        <div class="faq-card">
+          <h3>How can I get involved?</h3>
+          <p>
+            Clinicians interested in being design partners, investors, and
+            potential strategic partners in imaging informatics can reach
+            us via the contact section below.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact">
+    <div class="wrap contact-wrap">
+      <div>
+        <div class="eyebrow">
+          <span class="eyebrow-stop"></span>
+          GET IN TOUCH
+        </div>
+        <h2>Investors, clinicians, partners.</h2>
+        <p>
+          If you're a CT-guided procedure operator, an investor in surgical
+          navigation, or a strategic partner in imaging informatics, we want
+          to hear from you.
+        </p>
+      </div>
+      <div class="contact-card">
+        <a class="btn btn-primary btn-large" href="mailto:hello@needlegps.com">
+          hello@needlegps.com
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </a>
+        <div class="contact-meta">San Francisco · NeedleGPS, Inc.</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <div class="footer-brand-row">
+        <img class="footer-brand-img" src="assets/logos/needlegps-mark.png" alt="NeedleGPS" width="44" height="44" />
+        <span class="brand-name">NeedleGPS</span>
+      </div>
+      <div class="footer-tag">Gold-standard navigation for CT-guided interventions.</div>
+    </div>
+    <div class="footer-meta">
+      <div>© <span id="year"></span> NeedleGPS, Inc. All rights reserved.</div>
+      <div class="footer-note">Caution. Investigational device. Limited by United States law to investigational use. Not for sale.</div>
+    </div>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script src="gate.js?v=20260519-i" defer></script>
+<script src="nav.js?v=20260519-i" defer></script>
+<script src="particles.js?v=20260519-i" defer></script>
+<script src="blowup.js?v=20260519-i" defer></script>
+</body>
+</html>

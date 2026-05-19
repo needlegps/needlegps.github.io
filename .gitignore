@@ -1,0 +1,22 @@
+# Internal-only assets (don't ship to the public deploy)
+beta/
+_design_system/
+_build_ct_anatomy_real.py
+
+# Render-pipeline source files (the deployed site uses the PNGs only)
+renders/needlegps_explode.blend
+renders/build_explode.py
+renders/run_batches.sh
+renders/blender_log_test.txt
+renders/blender_log.txt
+renders/README.md
+renders/BLENDER_NOT_FOUND.md
+
+# CT-anatomy build artifacts (the deployed site uses the .json only)
+ct_anatomy_real.README.md
+ct_anatomy.README.md
+
+# OS / editor noise
+.DS_Store
+.vscode/
+*.swp

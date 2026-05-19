@@ -1,0 +1,421 @@
+{
+  "_meta": {
+    "coord_system": "DICOM-like normalized: x in [-1,1] (negative = patient's right / viewer's left), y in [-1,1] (negative = anterior, positive = posterior). r is radius as fraction of body half-width.",
+    "shape_roles": ["air", "lung", "soft", "vessel", "bone", "lesion", "fat"],
+    "shape_kinds": ["ellipse", "crescent", "kidney", "arc"],
+    "notes": "Body silhouette is an oval slightly flattened posteriorly. Shapes per axial slice = 16; per coronal slice = 16. Padded with low-r near-zero shapes where needed so JS can interpolate by index/name across adjacent slices."
+  },
+  "axial": [
+    {
+      "level": "T2",
+      "label": "Thoracic Inlet",
+      "shapes": [
+        { "name": "body", "x": 0.00, "y": 0.05, "r": 1.00, "shape": "ellipse", "fill_role": "soft", "note": "Body silhouette, narrow at inlet" },
+        { "name": "vertebra", "x": 0.00, "y": 0.78, "r": 0.14, "shape": "ellipse", "fill_role": "bone", "note": "T2 vertebral body, posterior midline" },
+        { "name": "trachea", "x": 0.00, "y": 0.10, "r": 0.07, "shape": "ellipse", "fill_role": "air", "note": "Trachea, midline, air-filled" },
+        { "name": "esophagus", "x": 0.05, "y": 0.45, "r": 0.05, "shape": "ellipse", "fill_role": "soft", "note": "Esophagus posterior to trachea" },
+        { "name": "rt_lung", "x": -0.55, "y": 0.10, "r": 0.30, "shape": "crescent", "fill_role": "lung", "note": "Right lung apex" },
+        { "name": "lt_lung", "x": 0.55, "y": 0.10, "r": 0.30, "shape": "crescent", "fill_role": "lung", "note": "Left lung apex" },
+        { "name": "rt_brachioceph_a", "x": -0.10, "y": -0.05, "r": 0.05, "shape": "ellipse", "fill_role": "vessel", "note": "Right brachiocephalic artery" },
+        { "name": "lt_cca", "x": 0.05, "y": -0.10, "r": 0.04, "shape": "ellipse", "fill_role": "vessel", "note": "Left common carotid artery" },
+        { "name": "lt_subclavian_a", "x": 0.15, "y": -0.05, "r": 0.04, "shape": "ellipse", "fill_role": "vessel", "note": "Left subclavian artery" },
+        { "name": "rt_brachioceph_v", "x": -0.20, "y": -0.20, "r": 0.06, "shape": "ellipse", "fill_role": "vessel", "note": "Right brachiocephalic vein" },
+        { "name": "lt_brachioceph_v", "x": 0.20, "y": -0.20, "r": 0.06, "shape": "ellipse", "fill_role": "vessel", "note": "Left brachiocephalic vein crossing midline" },
+        { "name": "rt_1st_rib", "x": -0.85, "y": 0.20, "r": 0.06, "shape": "arc", "fill_role": "bone", "note": "Right first rib, lateral curve" },
+        { "name": "lt_1st_rib", "x": 0.85, "y": 0.20, "r": 0.06, "shape": "arc", "fill_role": "bone", "note": "Left first rib, lateral curve" },
+        { "name": "manubrium", "x": 0.00, "y": -0.75, "r": 0.10, "shape": "ellipse", "fill_role": "bone", "note": "Manubrium of sternum, anterior" },
+        { "name": "thymus", "x": 0.00, "y": -0.40, "r": 0.06, "shape": "ellipse", "fill_role": "fat", "note": "Thymic remnant / mediastinal fat" },
+        { "name": "spinal_canal", "x": 0.00, "y": 0.88, "r": 0.04, "shape": "ellipse", "fill_role": "soft", "note": "Spinal canal posterior" }
+      ],
+      "edges": [
+        ["rt_brachioceph_v", "lt_brachioceph_v"],
+        ["rt_brachioceph_a", "lt_cca"],
+        ["lt_cca", "lt_subclavian_a"],
+        ["trachea", "esophagus"]
+      ]
+    },
+    {
+      "level": "T3",
+      "label": "Lung Apex / Aortic Origin",
+      "shapes": [
+        { "name": "body", "x": 0.00, "y": 0.05, "r": 1.00, "shape": "ellipse", "fill_role": "soft", "note": "Body silhouette widens slightly" },
+        { "name": "vertebra", "x": 0.00, "y": 0.78, "r": 0.15, "shape": "ellipse", "fill_role": "bone", "note": "T3 vertebral body" },
+        { "name": "trachea", "x": 0.00, "y": 0.10, "r": 0.08, "shape": "ellipse", "fill_role": "air", "note": "Trachea, midline" },
+        { "name": "esophagus", "x": 0.05, "y": 0.45, "r": 0.05, "shape": "ellipse", "fill_role": "soft", "note": "Esophagus, slightly left of midline" },
+        { "name": "rt_lung", "x": -0.55, "y": 0.10, "r": 0.40, "shape": "crescent", "fill_role": "lung", "note": "Right upper lobe" },
+        { "name": "lt_lung", "x": 0.55, "y": 0.10, "r": 0.40, "shape": "crescent", "fill_role": "lung", "note": "Left upper lobe" },
+        { "name": "rt_brachioceph_a", "x": -0.10, "y": -0.15, "r": 0.06, "shape": "ellipse", "fill_role": "vessel", "note": "Right brachiocephalic artery origin" },
+        { "name": "lt_cca", "x": 0.05, "y": -0.20, "r": 0.05, "shape": "ellipse", "fill_role": "vessel", "note": "Left common carotid" },
+        { "name": "lt_subclavian_a", "x": 0.18, "y": -0.10, "r": 0.05, "shape": "ellipse", "fill_role": "vessel", "note": "Left subclavian artery" },
+        { "name": "svc", "x": -0.18, "y": -0.05, "r": 0.07, "shape": "ellipse", "fill_role": "vessel", "note": "SVC forming from brachiocephalics" },
+        { "name": "lt_brachioceph_v", "x": 0.10, "y": -0.30, "r": 0.05, "shape": "ellipse", "fill_role": "vessel", "note": "Left brachiocephalic vein" },
+        { "name": "rt_2nd_rib", "x": -0.90, "y": 0.25, "r": 0.06, "shape": "arc", "fill_role": "bone", "note": "Right second rib" },
+        { "name": "lt_2nd_rib", "x": 0.90, "y": 0.25, "r": 0.06, "shape": "arc", "fill_role": "bone", "note": "Left second rib" },
+        { "name": "sternum", "x": 0.00, "y": -0.80, "r": 0.10, "shape": "ellipse", "fill_role": "bone", "note": "Manubriosternal junction" },
+        { "name": "thymus", "x": 0.00, "y": -0.45, "r": 0.10, "shape": "ellipse", "fill_role": "fat", "note": "Anterior mediastinal fat / thymus" },
+        { "name": "spinal_canal", "x": 0.00, "y": 0.88, "r": 0.04, "shape": "ellipse", "fill_role": "soft", "note": "Spinal canal" }
+      ],
+      "edges": [
+        ["rt_brachioceph_a", "svc"],
+        ["lt_brachioceph_v", "svc"],
+        ["rt_brachioceph_a", "lt_cca"],
+        ["lt_cca", "lt_subclavian_a"]
+      ]
+    },
+    {
+      "level": "T4",
+      "label": "Aortic Arch",
+      "shapes": [
+        { "name": "body", "x": 0.00, "y": 0.05, "r": 1.00, "shape": "ellipse", "fill_role": "soft", "note": "Body silhouette, full thoracic width" },
+        { "name": "vertebra", "x": 0.00, "y": 0.78, "r": 0.16, "shape": "ellipse", "fill_role": "bone", "note": "T4 vertebral body" },
+        { "name": "trachea", "x": 0.00, "y": 0.15, "r": 0.07, "shape": "ellipse", "fill_role": "air", "note": "Trachea, slightly indented by arch" },
+        { "name": "esophagus", "x": 0.05, "y": 0.50, "r": 0.05, "shape": "ellipse", "fill_role": "soft", "note": "Esophagus left-posterior to trachea" },
+        { "name": "rt_lung", "x": -0.60, "y": 0.10, "r": 0.45, "shape": "crescent", "fill_role": "lung", "note": "Right upper lobe" },
+        { "name": "lt_lung", "x": 0.60, "y": 0.10, "r": 0.45, "shape": "crescent", "fill_role": "lung", "note": "Left upper lobe" },
+        { "name": "arch", "x": 0.05, "y": 0.10, "r": 0.20, "shape": "arc", "fill_role": "vessel", "note": "Aortic arch sweeping front-to-back" },
+        { "name": "svc", "x": -0.20, "y": -0.05, "r": 0.08, "shape": "ellipse", "fill_role": "vessel", "note": "SVC anterolateral right" },
+        { "name": "asc_aorta", "x": -0.05, "y": -0.10, "r": 0.10, "shape": "ellipse", "fill_role": "vessel", "note": "Distal arch / proximal descending segment" },
+        { "name": "desc_aorta", "x": 0.18, "y": 0.55, "r": 0.08, "shape": "ellipse", "fill_role": "vessel", "note": "Descending aorta beginning, left paraspinal" },
+        { "name": "azygos", "x": -0.08, "y": 0.55, "r": 0.03, "shape": "ellipse", "fill_role": "vessel", "note": "Azygos vein, right paraspinal" },
+        { "name": "rt_3rd_rib", "x": -0.92, "y": 0.30, "r": 0.06, "shape": "arc", "fill_role": "bone", "note": "Right third rib" },
+        { "name": "lt_3rd_rib", "x": 0.92, "y": 0.30, "r": 0.06, "shape": "arc", "fill_role": "bone", "note": "Left third rib" },
+        { "name": "sternum", "x": 0.00, "y": -0.82, "r": 0.10, "shape": "ellipse", "fill_role": "bone", "note": "Sternum body" },
+        { "name": "thymus", "x": 0.00, "y": -0.50, "r": 0.12, "shape": "ellipse", "fill_role": "fat", "note": "Pretracheal / anterior mediastinal fat" },
+        { "name": "spinal_canal", "x": 0.00, "y": 0.88, "r": 0.04, "shape": "ellipse", "fill_role": "soft", "note": "Spinal canal" }
+      ],
+      "edges": [
+        ["svc", "arch"],
+        ["arch", "desc_aorta"],
+        ["arch", "asc_aorta"],
+        ["azygos", "svc"],
+        ["trachea", "esophagus"]
+      ]
+    },
+    {
+      "level": "T4-T5",
+      "label": "AP Window / Azygos Arch",
+      "shapes": [
+        { "name": "body", "x": 0.00, "y": 0.05, "r": 1.02, "shape": "ellipse", "fill_role": "soft", "note": "Body silhouette" },
+        { "name": "vertebra", "x": 0.00, "y": 0.78, "r": 0.16, "shape": "ellipse", "fill_role": "bone", "note": "T4-T5 vertebra" },
+        { "name": "trachea", "x": -0.02, "y": 0.20, "r": 0.07, "shape": "ellipse", "fill_role": "air", "note": "Lower trachea, just above carina" },
+        { "name": "esophagus", "x": 0.05, "y": 0.52, "r": 0.05, "shape": "ellipse", "fill_role": "soft", "note": "Esophagus, midline-left" },
+        { "name": "rt_lung", "x": -0.60, "y": 0.10, "r": 0.48, "shape": "crescent", "fill_role": "lung", "note": "Right lung, upper lobe" },
+        { "name": "lt_lung", "x": 0.60, "y": 0.10, "r": 0.48, "shape": "crescent", "fill_role": "lung", "note": "Left lung, upper lobe" },
+        { "name": "asc_aorta", "x": -0.05, "y": -0.20, "r": 0.11, "shape": "ellipse", "fill_role": "vessel", "note": "Ascending aorta anterior" },
+        { "name": "desc_aorta", "x": 0.20, "y": 0.55, "r": 0.09, "shape": "ellipse", "fill_role": "vessel", "note": "Descending aorta, left of spine" },
+        { "name": "svc", "x": -0.22, "y": -0.10, "r": 0.07, "shape": "ellipse", "fill_role": "vessel", "note": "SVC right of ascending aorta" },
+        { "name": "azygos_arch", "x": -0.15, "y": 0.25, "r": 0.05, "shape": "arc", "fill_role": "vessel", "note": "Azygos arch curving over right main bronchus" },
+        { "name": "ap_window", "x": 0.08, "y": 0.20, "r": 0.06, "shape": "ellipse", "fill_role": "fat", "note": "AP window: fat between arch and PA" },
+        { "name": "rt_3rd_rib", "x": -0.95, "y": 0.30, "r": 0.06, "shape": "arc", "fill_role": "bone", "note": "Right rib" },
+        { "name": "lt_3rd_rib", "x": 0.95, "y": 0.30, "r": 0.06, "shape": "arc", "fill_role": "bone", "note": "Left rib" },
+        { "name": "sternum", "x": 0.00, "y": -0.82, "r": 0.10, "shape": "ellipse", "fill_role": "bone", "note": "Sternum body" },
+        { "name": "thymus", "x": 0.00, "y": -0.55, "r": 0.10, "shape": "ellipse", "fill_role": "fat", "note": "Anterior mediastinal fat" },
+        { "name": "spinal_canal", "x": 0.00, "y": 0.88, "r": 0.04, "shape": "ellipse", "fill_role": "soft", "note": "Spinal canal" }
+      ],
+      "edges": [
+        ["svc", "asc_aorta"],
+        ["asc_aorta", "desc_aorta"],
+        ["azygos_arch", "svc"],
+        ["asc_aorta", "ap_window"],
+        ["trachea", "esophagus"]
+      ]
+    },
+    {
+      "level": "T5-T6",
+      "label": "Pulmonary Trunk + Carina",
+      "shapes": [
+        { "name": "body", "x": 0.00, "y": 0.05, "r": 1.05, "shape": "ellipse", "fill_role": "soft", "note": "Body silhouette" },
+        { "name": "vertebra", "x": 0.00, "y": 0.80, "r": 0.17, "shape": "ellipse", "fill_role": "bone", "note": "T5-T6 vertebral body" },
+        { "name": "carina", "x": 0.00, "y": 0.25, "r": 0.05, "shape": "ellipse", "fill_role": "air", "note": "Tracheal carina, splitting" },
+        { "name": "esophagus", "x": 0.05, "y": 0.55, "r": 0.05, "shape": "ellipse", "fill_role": "soft", "note": "Esophagus posterior" },
+        { "name": "rt_lung", "x": -0.62, "y": 0.10, "r": 0.50, "shape": "crescent", "fill_role": "lung", "note": "Right lung" },
+        { "name": "lt_lung", "x": 0.62, "y": 0.10, "r": 0.50, "shape": "crescent", "fill_role": "lung", "note": "Left lung" },
+        { "name": "asc_aorta", "x": -0.05, "y": -0.25, "r": 0.12, "shape": "ellipse", "fill_role": "vessel", "note": "Ascending aorta" },
+        { "name": "desc_aorta", "x": 0.20, "y": 0.55, "r": 0.09, "shape": "ellipse", "fill_role": "vessel", "note": "Descending aorta" },
+        { "name": "svc", "x": -0.22, "y": -0.12, "r": 0.07, "shape": "ellipse", "fill_role": "vessel", "note": "SVC" },
+        { "name": "pa_trunk", "x": 0.10, "y": 0.05, "r": 0.13, "shape": "ellipse", "fill_role": "vessel", "note": "Main pulmonary trunk, left of asc aorta" },
+        { "name": "rt_pa", "x": -0.18, "y": 0.15, "r": 0.08, "shape": "ellipse", "fill_role": "vessel", "note": "Right pulmonary artery crossing rightward" },
+        { "name": "azygos", "x": -0.10, "y": 0.55, "r": 0.03, "shape": "ellipse", "fill_role": "vessel", "note": "Azygos, right paraspinal" },
+        { "name": "rt_4th_rib", "x": -0.97, "y": 0.32, "r": 0.06, "shape": "arc", "fill_role": "bone", "note": "Right rib" },
+        { "name": "lt_4th_rib", "x": 0.97, "y": 0.32, "r": 0.06, "shape": "arc", "fill_role": "bone", "note": "Left rib" },
+        { "name": "sternum", "x": 0.00, "y": -0.82, "r": 0.10, "shape": "ellipse", "fill_role": "bone", "note": "Sternum body" },
+        { "name": "spinal_canal", "x": 0.00, "y": 0.90, "r": 0.04, "shape": "ellipse", "fill_role": "soft", "note": "Spinal canal" }
+      ],
+      "edges": [
+        ["svc", "asc_aorta"],
+        ["asc_aorta", "desc_aorta"],
+        ["pa_trunk", "rt_pa"],
+        ["azygos", "svc"],
+        ["carina", "esophagus"]
+      ]
+    },
+    {
+      "level": "T6",
+      "label": "R+L Main Bronchi / 3-Vessel Sign / LA Roof",
+      "shapes": [
+        { "name": "body", "x": 0.00, "y": 0.05, "r": 1.05, "shape": "ellipse", "fill_role": "soft", "note": "Body silhouette" },
+        { "name": "vertebra", "x": 0.00, "y": 0.80, "r": 0.17, "shape": "ellipse", "fill_role": "bone", "note": "T6 vertebral body" },
+        { "name": "rt_main_bronchus", "x": -0.14, "y": 0.25, "r": 0.05, "shape": "ellipse", "fill_role": "air", "note": "Right main bronchus, more vertical" },
+        { "name": "lt_main_bronchus", "x": 0.14, "y": 0.30, "r": 0.05, "shape": "ellipse", "fill_role": "air", "note": "Left main bronchus, more horizontal" },
+        { "name": "esophagus", "x": 0.04, "y": 0.55, "r": 0.05, "shape": "ellipse", "fill_role": "soft", "note": "Esophagus posterior to LA roof" },
+        { "name": "rt_lung", "x": -0.62, "y": 0.10, "r": 0.50, "shape": "crescent", "fill_role": "lung", "note": "Right lung" },
+        { "name": "lt_lung", "x": 0.62, "y": 0.10, "r": 0.50, "shape": "crescent", "fill_role": "lung", "note": "Left lung" },
+        { "name": "asc_aorta", "x": -0.08, "y": -0.25, "r": 0.12, "shape": "ellipse", "fill_role": "vessel", "note": "Ascending aorta" },
+        { "name": "desc_aorta", "x": 0.20, "y": 0.55, "r": 0.09, "shape": "ellipse", "fill_role": "vessel", "note": "Descending aorta" },
+        { "name": "svc", "x": -0.24, "y": -0.10, "r": 0.07, "shape": "ellipse", "fill_role": "vessel", "note": "SVC, 3-vessel sign" },
+        { "name": "rt_pa", "x": -0.25, "y": 0.20, "r": 0.08, "shape": "ellipse", "fill_role": "vessel", "note": "Right pulmonary artery" },
+        { "name": "lt_pa", "x": 0.25, "y": 0.05, "r": 0.08, "shape": "ellipse", "fill_role": "vessel", "note": "Left pulmonary artery hooking over LMB" },
+        { "name": "la_roof", "x": 0.00, "y": 0.40, "r": 0.14, "shape": "ellipse", "fill_role": "soft", "note": "Left atrial roof, retrobronchial" },
+        { "name": "rt_5th_rib", "x": -0.98, "y": 0.35, "r": 0.06, "shape": "arc", "fill_role": "bone", "note": "Right rib" },
+        { "name": "lt_5th_rib", "x": 0.98, "y": 0.35, "r": 0.06, "shape": "arc", "fill_role": "bone", "note": "Left rib" },
+        { "name": "sternum", "x": 0.00, "y": -0.82, "r": 0.10, "shape": "ellipse", "fill_role": "bone", "note": "Sternum" }
+      ],
+      "edges": [
+        ["svc", "asc_aorta"],
+        ["asc_aorta", "desc_aorta"],
+        ["rt_pa", "lt_pa"],
+        ["rt_main_bronchus", "lt_main_bronchus"],
+        ["la_roof", "lt_pa"]
+      ]
+    },
+    {
+      "level": "T7-T8",
+      "label": "4-Chamber Heart + Descending Aorta",
+      "shapes": [
+        { "name": "body", "x": 0.00, "y": 0.10, "r": 1.08, "shape": "ellipse", "fill_role": "soft", "note": "Body silhouette, broadest" },
+        { "name": "vertebra", "x": 0.00, "y": 0.82, "r": 0.18, "shape": "ellipse", "fill_role": "bone", "note": "T7-T8 vertebral body" },
+        { "name": "ra", "x": -0.20, "y": 0.05, "r": 0.18, "shape": "ellipse", "fill_role": "soft", "note": "Right atrium, right anterior" },
+        { "name": "rv", "x": -0.05, "y": -0.25, "r": 0.22, "shape": "ellipse", "fill_role": "soft", "note": "Right ventricle, retrosternal" },
+        { "name": "la", "x": 0.15, "y": 0.40, "r": 0.16, "shape": "ellipse", "fill_role": "soft", "note": "Left atrium, posterior" },
+        { "name": "lv", "x": 0.25, "y": 0.10, "r": 0.22, "shape": "ellipse", "fill_role": "soft", "note": "Left ventricle, left posterior" },
+        { "name": "desc_aorta", "x": 0.18, "y": 0.60, "r": 0.09, "shape": "ellipse", "fill_role": "vessel", "note": "Descending thoracic aorta" },
+        { "name": "azygos", "x": -0.08, "y": 0.60, "r": 0.03, "shape": "ellipse", "fill_role": "vessel", "note": "Azygos vein paraspinal" },
+        { "name": "esophagus", "x": 0.05, "y": 0.55, "r": 0.04, "shape": "ellipse", "fill_role": "soft", "note": "Esophagus behind LA" },
+        { "name": "rt_lung", "x": -0.65, "y": 0.15, "r": 0.50, "shape": "crescent", "fill_role": "lung", "note": "Right lung, middle/lower lobe" },
+        { "name": "lt_lung", "x": 0.65, "y": 0.15, "r": 0.48, "shape": "crescent", "fill_role": "lung", "note": "Left lung, lingula/lower lobe" },
+        { "name": "ivc", "x": -0.22, "y": 0.40, "r": 0.05, "shape": "ellipse", "fill_role": "vessel", "note": "IVC entering RA" },
+        { "name": "coronary_sinus", "x": 0.00, "y": 0.40, "r": 0.03, "shape": "ellipse", "fill_role": "vessel", "note": "Coronary sinus, AV groove" },
+        { "name": "rt_6th_rib", "x": -1.00, "y": 0.40, "r": 0.06, "shape": "arc", "fill_role": "bone", "note": "Right rib" },
+        { "name": "lt_6th_rib", "x": 1.00, "y": 0.40, "r": 0.06, "shape": "arc", "fill_role": "bone", "note": "Left rib" },
+        { "name": "sternum", "x": 0.00, "y": -0.82, "r": 0.10, "shape": "ellipse", "fill_role": "bone", "note": "Lower sternum" }
+      ],
+      "edges": [
+        ["ivc", "ra"],
+        ["ra", "rv"],
+        ["la", "lv"],
+        ["desc_aorta", "azygos"],
+        ["la", "esophagus"]
+      ]
+    },
+    {
+      "level": "T9-T11",
+      "label": "Diaphragm / Liver Dome / Spleen / Stomach",
+      "shapes": [
+        { "name": "body", "x": 0.00, "y": 0.10, "r": 1.05, "shape": "ellipse", "fill_role": "soft", "note": "Upper abdomen silhouette" },
+        { "name": "vertebra", "x": 0.00, "y": 0.78, "r": 0.18, "shape": "ellipse", "fill_role": "bone", "note": "T10/T11 vertebral body" },
+        { "name": "liver", "x": -0.35, "y": 0.00, "r": 0.55, "shape": "kidney", "fill_role": "soft", "note": "Liver dome, right hemidiaphragm" },
+        { "name": "spleen", "x": 0.55, "y": 0.20, "r": 0.20, "shape": "ellipse", "fill_role": "soft", "note": "Spleen, left posterior" },
+        { "name": "stomach", "x": 0.25, "y": -0.15, "r": 0.20, "shape": "ellipse", "fill_role": "air", "note": "Stomach fundus with air-fluid" },
+        { "name": "desc_aorta", "x": 0.10, "y": 0.55, "r": 0.08, "shape": "ellipse", "fill_role": "vessel", "note": "Descending aorta passing through hiatus" },
+        { "name": "ivc", "x": -0.18, "y": 0.40, "r": 0.07, "shape": "ellipse", "fill_role": "vessel", "note": "IVC through diaphragm into liver" },
+        { "name": "azygos", "x": -0.05, "y": 0.55, "r": 0.03, "shape": "ellipse", "fill_role": "vessel", "note": "Azygos / hemiazygos paraspinal" },
+        { "name": "esophagus", "x": 0.05, "y": 0.40, "r": 0.05, "shape": "ellipse", "fill_role": "soft", "note": "Distal esophagus, GE junction" },
+        { "name": "rt_lung", "x": -0.70, "y": 0.05, "r": 0.30, "shape": "crescent", "fill_role": "lung", "note": "Right lung base sliver" },
+        { "name": "lt_lung", "x": 0.70, "y": 0.05, "r": 0.30, "shape": "crescent", "fill_role": "lung", "note": "Left lung base sliver" },
+        { "name": "diaphragm_r", "x": -0.30, "y": -0.20, "r": 0.30, "shape": "arc", "fill_role": "soft", "note": "Right hemidiaphragm dome" },
+        { "name": "diaphragm_l", "x": 0.30, "y": -0.10, "r": 0.25, "shape": "arc", "fill_role": "soft", "note": "Left hemidiaphragm" },
+        { "name": "rt_8th_rib", "x": -0.95, "y": 0.45, "r": 0.06, "shape": "arc", "fill_role": "bone", "note": "Right lower rib" },
+        { "name": "lt_8th_rib", "x": 0.95, "y": 0.45, "r": 0.06, "shape": "arc", "fill_role": "bone", "note": "Left lower rib" },
+        { "name": "xiphoid", "x": 0.00, "y": -0.78, "r": 0.06, "shape": "ellipse", "fill_role": "bone", "note": "Xiphoid process / costal cartilage" }
+      ],
+      "edges": [
+        ["ivc", "liver"],
+        ["desc_aorta", "azygos"],
+        ["esophagus", "stomach"],
+        ["diaphragm_r", "liver"],
+        ["diaphragm_l", "spleen"]
+      ]
+    }
+  ],
+  "coronal": [
+    {
+      "level": "C1",
+      "label": "Anterior Chest Wall + Sternum / Anterior Heart Border",
+      "shapes": [
+        { "name": "body", "x": 0.00, "y": 0.00, "r": 1.00, "shape": "ellipse", "fill_role": "soft", "note": "Coronal body outline, head-up" },
+        { "name": "sternum", "x": 0.00, "y": 0.05, "r": 0.10, "shape": "ellipse", "fill_role": "bone", "note": "Sternum midline column" },
+        { "name": "manubrium", "x": 0.00, "y": -0.45, "r": 0.10, "shape": "ellipse", "fill_role": "bone", "note": "Manubrium superior" },
+        { "name": "rt_clavicle", "x": -0.35, "y": -0.55, "r": 0.10, "shape": "arc", "fill_role": "bone", "note": "Right clavicle" },
+        { "name": "lt_clavicle", "x": 0.35, "y": -0.55, "r": 0.10, "shape": "arc", "fill_role": "bone", "note": "Left clavicle" },
+        { "name": "rv_anterior", "x": -0.05, "y": 0.30, "r": 0.20, "shape": "ellipse", "fill_role": "soft", "note": "Anterior heart border / RV" },
+        { "name": "rt_lung", "x": -0.55, "y": 0.05, "r": 0.50, "shape": "crescent", "fill_role": "lung", "note": "Right lung anterior segments" },
+        { "name": "lt_lung", "x": 0.55, "y": 0.05, "r": 0.50, "shape": "crescent", "fill_role": "lung", "note": "Left lung anterior segments" },
+        { "name": "rt_internal_mammary", "x": -0.12, "y": 0.05, "r": 0.02, "shape": "ellipse", "fill_role": "vessel", "note": "Right internal mammary artery" },
+        { "name": "lt_internal_mammary", "x": 0.12, "y": 0.05, "r": 0.02, "shape": "ellipse", "fill_role": "vessel", "note": "Left internal mammary artery" },
+        { "name": "rt_3rd_rib", "x": -0.75, "y": -0.10, "r": 0.08, "shape": "arc", "fill_role": "bone", "note": "Right anterior rib cartilage" },
+        { "name": "lt_3rd_rib", "x": 0.75, "y": -0.10, "r": 0.08, "shape": "arc", "fill_role": "bone", "note": "Left anterior rib cartilage" },
+        { "name": "rt_5th_rib", "x": -0.80, "y": 0.30, "r": 0.08, "shape": "arc", "fill_role": "bone", "note": "Right lower anterior rib" },
+        { "name": "lt_5th_rib", "x": 0.80, "y": 0.30, "r": 0.08, "shape": "arc", "fill_role": "bone", "note": "Left lower anterior rib" },
+        { "name": "diaphragm_r", "x": -0.30, "y": 0.65, "r": 0.30, "shape": "arc", "fill_role": "soft", "note": "Right hemidiaphragm dome" },
+        { "name": "liver_dome", "x": -0.30, "y": 0.80, "r": 0.30, "shape": "kidney", "fill_role": "soft", "note": "Liver dome under right diaphragm" }
+      ],
+      "edges": [
+        ["rt_internal_mammary", "lt_internal_mammary"],
+        ["sternum", "manubrium"],
+        ["rv_anterior", "diaphragm_r"],
+        ["liver_dome", "diaphragm_r"]
+      ]
+    },
+    {
+      "level": "C2",
+      "label": "Mid-Anterior: RV, anterior LV, ascending aorta",
+      "shapes": [
+        { "name": "body", "x": 0.00, "y": 0.00, "r": 1.02, "shape": "ellipse", "fill_role": "soft", "note": "Coronal body outline" },
+        { "name": "trachea", "x": 0.00, "y": -0.50, "r": 0.06, "shape": "ellipse", "fill_role": "air", "note": "Lower trachea midline" },
+        { "name": "asc_aorta", "x": -0.05, "y": -0.10, "r": 0.10, "shape": "ellipse", "fill_role": "vessel", "note": "Ascending aorta column" },
+        { "name": "svc", "x": -0.20, "y": -0.20, "r": 0.07, "shape": "ellipse", "fill_role": "vessel", "note": "SVC right of asc aorta" },
+        { "name": "rv", "x": -0.05, "y": 0.30, "r": 0.22, "shape": "ellipse", "fill_role": "soft", "note": "Right ventricle bulk" },
+        { "name": "lv_anterior", "x": 0.20, "y": 0.30, "r": 0.20, "shape": "ellipse", "fill_role": "soft", "note": "Anterior LV wall" },
+        { "name": "ra", "x": -0.25, "y": 0.20, "r": 0.15, "shape": "ellipse", "fill_role": "soft", "note": "Right atrium" },
+        { "name": "rt_lung", "x": -0.60, "y": 0.00, "r": 0.50, "shape": "crescent", "fill_role": "lung", "note": "Right lung" },
+        { "name": "lt_lung", "x": 0.60, "y": 0.00, "r": 0.50, "shape": "crescent", "fill_role": "lung", "note": "Left lung" },
+        { "name": "rt_brachioceph_v", "x": -0.20, "y": -0.45, "r": 0.05, "shape": "ellipse", "fill_role": "vessel", "note": "Right brachiocephalic vein" },
+        { "name": "lt_brachioceph_v", "x": 0.20, "y": -0.45, "r": 0.05, "shape": "ellipse", "fill_role": "vessel", "note": "Left brachiocephalic vein" },
+        { "name": "pa_trunk", "x": 0.10, "y": 0.05, "r": 0.10, "shape": "ellipse", "fill_role": "vessel", "note": "Main PA / RVOT region" },
+        { "name": "ivc", "x": -0.25, "y": 0.55, "r": 0.06, "shape": "ellipse", "fill_role": "vessel", "note": "IVC entering RA from below" },
+        { "name": "diaphragm_r", "x": -0.30, "y": 0.65, "r": 0.30, "shape": "arc", "fill_role": "soft", "note": "Right hemidiaphragm" },
+        { "name": "liver_dome", "x": -0.30, "y": 0.80, "r": 0.30, "shape": "kidney", "fill_role": "soft", "note": "Liver dome" },
+        { "name": "sternum", "x": 0.00, "y": 0.10, "r": 0.05, "shape": "ellipse", "fill_role": "bone", "note": "Posterior sternum edge" }
+      ],
+      "edges": [
+        ["svc", "ra"],
+        ["ivc", "ra"],
+        ["ra", "rv"],
+        ["rv", "pa_trunk"],
+        ["asc_aorta", "lv_anterior"],
+        ["rt_brachioceph_v", "svc"],
+        ["lt_brachioceph_v", "svc"]
+      ]
+    },
+    {
+      "level": "C3",
+      "label": "Mid: Aortic Root, LA, Mitral Plane, Hila",
+      "shapes": [
+        { "name": "body", "x": 0.00, "y": 0.00, "r": 1.04, "shape": "ellipse", "fill_role": "soft", "note": "Coronal body outline" },
+        { "name": "trachea", "x": 0.00, "y": -0.45, "r": 0.06, "shape": "ellipse", "fill_role": "air", "note": "Trachea ending at carina" },
+        { "name": "carina", "x": 0.00, "y": -0.30, "r": 0.04, "shape": "ellipse", "fill_role": "air", "note": "Carina visible mid-plane" },
+        { "name": "rt_main_bronchus", "x": -0.15, "y": -0.20, "r": 0.05, "shape": "ellipse", "fill_role": "air", "note": "Right main bronchus" },
+        { "name": "lt_main_bronchus", "x": 0.15, "y": -0.20, "r": 0.05, "shape": "ellipse", "fill_role": "air", "note": "Left main bronchus" },
+        { "name": "aortic_root", "x": -0.02, "y": 0.10, "r": 0.12, "shape": "ellipse", "fill_role": "vessel", "note": "Aortic root above LV" },
+        { "name": "arch", "x": 0.00, "y": -0.40, "r": 0.20, "shape": "arc", "fill_role": "vessel", "note": "Aortic arch sweeping across plane" },
+        { "name": "la", "x": 0.05, "y": 0.25, "r": 0.20, "shape": "ellipse", "fill_role": "soft", "note": "Left atrium, midline" },
+        { "name": "lv", "x": 0.20, "y": 0.40, "r": 0.20, "shape": "ellipse", "fill_role": "soft", "note": "Left ventricle, mitral plane" },
+        { "name": "ra", "x": -0.25, "y": 0.30, "r": 0.15, "shape": "ellipse", "fill_role": "soft", "note": "Right atrium" },
+        { "name": "rt_pa", "x": -0.25, "y": -0.10, "r": 0.07, "shape": "ellipse", "fill_role": "vessel", "note": "Right PA at hilum" },
+        { "name": "lt_pa", "x": 0.25, "y": -0.10, "r": 0.07, "shape": "ellipse", "fill_role": "vessel", "note": "Left PA at hilum" },
+        { "name": "rt_lung", "x": -0.65, "y": 0.00, "r": 0.45, "shape": "crescent", "fill_role": "lung", "note": "Right lung" },
+        { "name": "lt_lung", "x": 0.65, "y": 0.00, "r": 0.45, "shape": "crescent", "fill_role": "lung", "note": "Left lung" },
+        { "name": "diaphragm_r", "x": -0.30, "y": 0.70, "r": 0.30, "shape": "arc", "fill_role": "soft", "note": "Right hemidiaphragm" },
+        { "name": "liver_dome", "x": -0.30, "y": 0.85, "r": 0.30, "shape": "kidney", "fill_role": "soft", "note": "Liver dome posteriorly" }
+      ],
+      "edges": [
+        ["arch", "aortic_root"],
+        ["aortic_root", "lv"],
+        ["la", "lv"],
+        ["rt_pa", "lt_pa"],
+        ["rt_main_bronchus", "lt_main_bronchus"],
+        ["carina", "trachea"]
+      ]
+    },
+    {
+      "level": "C4",
+      "label": "Mid-Posterior: LV Outflow, Descending Aorta, Hila Vessels",
+      "shapes": [
+        { "name": "body", "x": 0.00, "y": 0.00, "r": 1.05, "shape": "ellipse", "fill_role": "soft", "note": "Coronal body outline" },
+        { "name": "trachea", "x": 0.00, "y": -0.50, "r": 0.05, "shape": "ellipse", "fill_role": "air", "note": "Posterior trachea segment" },
+        { "name": "esophagus", "x": 0.02, "y": -0.20, "r": 0.04, "shape": "ellipse", "fill_role": "soft", "note": "Esophagus behind LA" },
+        { "name": "desc_aorta", "x": 0.10, "y": -0.10, "r": 0.08, "shape": "ellipse", "fill_role": "vessel", "note": "Descending aorta column, left of spine" },
+        { "name": "arch", "x": 0.05, "y": -0.55, "r": 0.18, "shape": "arc", "fill_role": "vessel", "note": "Aortic arch posterior limb" },
+        { "name": "la", "x": 0.00, "y": 0.20, "r": 0.20, "shape": "ellipse", "fill_role": "soft", "note": "Left atrium" },
+        { "name": "lv_outflow", "x": -0.05, "y": 0.40, "r": 0.18, "shape": "ellipse", "fill_role": "soft", "note": "LV outflow / posterior LV" },
+        { "name": "rt_pa", "x": -0.28, "y": -0.05, "r": 0.07, "shape": "ellipse", "fill_role": "vessel", "note": "Right PA descending limb at hilum" },
+        { "name": "lt_pa", "x": 0.28, "y": -0.05, "r": 0.07, "shape": "ellipse", "fill_role": "vessel", "note": "Left PA descending limb at hilum" },
+        { "name": "rt_pulm_v", "x": -0.20, "y": 0.15, "r": 0.05, "shape": "ellipse", "fill_role": "vessel", "note": "Right pulmonary veins to LA" },
+        { "name": "lt_pulm_v", "x": 0.20, "y": 0.15, "r": 0.05, "shape": "ellipse", "fill_role": "vessel", "note": "Left pulmonary veins to LA" },
+        { "name": "azygos", "x": -0.05, "y": -0.10, "r": 0.03, "shape": "ellipse", "fill_role": "vessel", "note": "Azygos vein paraspinal" },
+        { "name": "rt_lung", "x": -0.65, "y": 0.00, "r": 0.45, "shape": "crescent", "fill_role": "lung", "note": "Right lung" },
+        { "name": "lt_lung", "x": 0.65, "y": 0.00, "r": 0.45, "shape": "crescent", "fill_role": "lung", "note": "Left lung" },
+        { "name": "diaphragm_r", "x": -0.30, "y": 0.70, "r": 0.30, "shape": "arc", "fill_role": "soft", "note": "Right hemidiaphragm" },
+        { "name": "liver_dome", "x": -0.30, "y": 0.85, "r": 0.28, "shape": "kidney", "fill_role": "soft", "note": "Liver dome" }
+      ],
+      "edges": [
+        ["arch", "desc_aorta"],
+        ["la", "lv_outflow"],
+        ["rt_pulm_v", "la"],
+        ["lt_pulm_v", "la"],
+        ["rt_pa", "lt_pa"],
+        ["desc_aorta", "azygos"]
+      ]
+    },
+    {
+      "level": "C5",
+      "label": "Posterior: Descending Aorta, Posterior LV, Vertebrae",
+      "shapes": [
+        { "name": "body", "x": 0.00, "y": 0.00, "r": 1.04, "shape": "ellipse", "fill_role": "soft", "note": "Coronal body outline, posterior" },
+        { "name": "vertebra_t4", "x": 0.00, "y": -0.55, "r": 0.10, "shape": "ellipse", "fill_role": "bone", "note": "T4 vertebral body in plane" },
+        { "name": "vertebra_t6", "x": 0.00, "y": -0.25, "r": 0.11, "shape": "ellipse", "fill_role": "bone", "note": "T6 vertebral body" },
+        { "name": "vertebra_t8", "x": 0.00, "y": 0.05, "r": 0.12, "shape": "ellipse", "fill_role": "bone", "note": "T8 vertebral body" },
+        { "name": "vertebra_t10", "x": 0.00, "y": 0.35, "r": 0.12, "shape": "ellipse", "fill_role": "bone", "note": "T10 vertebral body" },
+        { "name": "desc_aorta", "x": 0.10, "y": 0.05, "r": 0.08, "shape": "ellipse", "fill_role": "vessel", "note": "Descending aorta left of spine" },
+        { "name": "azygos", "x": -0.07, "y": 0.05, "r": 0.03, "shape": "ellipse", "fill_role": "vessel", "note": "Azygos vein right of spine" },
+        { "name": "esophagus", "x": 0.04, "y": -0.05, "r": 0.04, "shape": "ellipse", "fill_role": "soft", "note": "Esophagus pre-vertebral" },
+        { "name": "posterior_lv", "x": 0.20, "y": 0.45, "r": 0.18, "shape": "ellipse", "fill_role": "soft", "note": "Posterior LV wall" },
+        { "name": "la_posterior", "x": 0.00, "y": 0.25, "r": 0.15, "shape": "ellipse", "fill_role": "soft", "note": "Posterior LA wall" },
+        { "name": "rt_lung", "x": -0.60, "y": 0.00, "r": 0.50, "shape": "crescent", "fill_role": "lung", "note": "Right lung posterior segments" },
+        { "name": "lt_lung", "x": 0.60, "y": 0.00, "r": 0.50, "shape": "crescent", "fill_role": "lung", "note": "Left lung posterior segments" },
+        { "name": "rt_pulm_v", "x": -0.20, "y": 0.20, "r": 0.04, "shape": "ellipse", "fill_role": "vessel", "note": "Right inferior pulmonary vein" },
+        { "name": "lt_pulm_v", "x": 0.20, "y": 0.20, "r": 0.04, "shape": "ellipse", "fill_role": "vessel", "note": "Left inferior pulmonary vein" },
+        { "name": "diaphragm_r", "x": -0.30, "y": 0.70, "r": 0.30, "shape": "arc", "fill_role": "soft", "note": "Right hemidiaphragm posterior" },
+        { "name": "liver_dome", "x": -0.30, "y": 0.85, "r": 0.28, "shape": "kidney", "fill_role": "soft", "note": "Liver posterior segment" }
+      ],
+      "edges": [
+        ["desc_aorta", "azygos"],
+        ["vertebra_t4", "vertebra_t6"],
+        ["vertebra_t6", "vertebra_t8"],
+        ["vertebra_t8", "vertebra_t10"],
+        ["la_posterior", "posterior_lv"],
+        ["rt_pulm_v", "la_posterior"]
+      ]
+    },
+    {
+      "level": "C6",
+      "label": "Posterior Chest Wall",
+      "shapes": [
+        { "name": "body", "x": 0.00, "y": 0.00, "r": 1.00, "shape": "ellipse", "fill_role": "soft", "note": "Coronal body outline, posterior" },
+        { "name": "vertebra_t2", "x": 0.00, "y": -0.75, "r": 0.10, "shape": "ellipse", "fill_role": "bone", "note": "T2 spinous process in plane" },
+        { "name": "vertebra_t4", "x": 0.00, "y": -0.50, "r": 0.11, "shape": "ellipse", "fill_role": "bone", "note": "T4 posterior elements" },
+        { "name": "vertebra_t6", "x": 0.00, "y": -0.20, "r": 0.11, "shape": "ellipse", "fill_role": "bone", "note": "T6 posterior elements" },
+        { "name": "vertebra_t8", "x": 0.00, "y": 0.10, "r": 0.12, "shape": "ellipse", "fill_role": "bone", "note": "T8 posterior elements" },
+        { "name": "vertebra_t10", "x": 0.00, "y": 0.40, "r": 0.12, "shape": "ellipse", "fill_role": "bone", "note": "T10 posterior elements" },
+        { "name": "rt_scapula", "x": -0.55, "y": -0.30, "r": 0.18, "shape": "arc", "fill_role": "bone", "note": "Right scapular blade" },
+        { "name": "lt_scapula", "x": 0.55, "y": -0.30, "r": 0.18, "shape": "arc", "fill_role": "bone", "note": "Left scapular blade" },
+        { "name": "rt_post_ribs", "x": -0.80, "y": 0.10, "r": 0.10, "shape": "arc", "fill_role": "bone", "note": "Right posterior ribs" },
+        { "name": "lt_post_ribs", "x": 0.80, "y": 0.10, "r": 0.10, "shape": "arc", "fill_role": "bone", "note": "Left posterior ribs" },
+        { "name": "rt_lung", "x": -0.55, "y": 0.10, "r": 0.45, "shape": "crescent", "fill_role": "lung", "note": "Right lung posterior" },
+        { "name": "lt_lung", "x": 0.55, "y": 0.10, "r": 0.45, "shape": "crescent", "fill_role": "lung", "note": "Left lung posterior" },
+        { "name": "paraspinal_muscle_r", "x": -0.15, "y": 0.20, "r": 0.08, "shape": "ellipse", "fill_role": "soft", "note": "Right paraspinal musculature" },
+        { "name": "paraspinal_muscle_l", "x": 0.15, "y": 0.20, "r": 0.08, "shape": "ellipse", "fill_role": "soft", "note": "Left paraspinal musculature" },
+        { "name": "diaphragm_r", "x": -0.30, "y": 0.65, "r": 0.25, "shape": "arc", "fill_role": "soft", "note": "Right hemidiaphragm posterior slip" },
+        { "name": "kidney_upper_r", "x": -0.25, "y": 0.85, "r": 0.10, "shape": "kidney", "fill_role": "soft", "note": "Right kidney upper pole edge" }
+      ],
+      "edges": [
+        ["vertebra_t2", "vertebra_t4"],
+        ["vertebra_t4", "vertebra_t6"],
+        ["vertebra_t6", "vertebra_t8"],
+        ["vertebra_t8", "vertebra_t10"],
+        ["rt_scapula", "rt_post_ribs"],
+        ["lt_scapula", "lt_post_ribs"]
+      ]
+    }
+  ]
+}

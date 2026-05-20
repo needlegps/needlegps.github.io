@@ -1,0 +1,5 @@
+# Cloudflare Pages redirects.
+# Format: <from> <to> <status>
+# Reference: https://developers.cloudflare.com/pages/configuration/redirects/
+
+# (none for now — every URL goes to its file directly)

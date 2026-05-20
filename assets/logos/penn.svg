@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Placeholder Penn wordmark. The University of Pennsylvania's official
+     mark uses a serif "Penn" in Penn Red (#990000). Swap for the official
+     asset when team has rights cleared. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 96" role="img" aria-label="Penn">
+  <style>
+    .wordmark { font: 700 64px 'Georgia', 'Adobe Caslon Pro', 'Times New Roman', serif; fill: #990000; letter-spacing: 0.005em; }
+    .sub      { font: 500 10.5px 'Manrope', Arial, sans-serif; fill: #990000; letter-spacing: 0.24em; }
+  </style>
+  <text class="wordmark" x="10" y="62">Penn</text>
+  <text class="sub" x="12" y="84">UNIVERSITY OF PENNSYLVANIA</text>
+</svg>

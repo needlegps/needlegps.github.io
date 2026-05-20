@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Placeholder SFGH wordmark. SFGH (now ZSFG, Zuckerberg San Francisco
+     General Hospital) is the UCSF-affiliated public hospital. The team
+     should swap this for the official ZSFG mark when available. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 96" role="img" aria-label="SFGH">
+  <style>
+    .wordmark { font: 800 56px 'Manrope', 'Helvetica Neue', Arial, sans-serif; fill: #003B70; letter-spacing: 0.02em; }
+    .sub      { font: 500 11px 'Manrope', Arial, sans-serif; fill: #003B70; letter-spacing: 0.22em; }
+    .accent   { fill: #1FB6C9; }
+  </style>
+  <text class="wordmark" x="6" y="58">SF<tspan class="accent">G</tspan>H</text>
+  <text class="sub" x="8" y="82">SAN FRANCISCO · GENERAL · HOSPITAL</text>
+</svg>

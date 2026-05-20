@@ -1,22 +1,49 @@
-# Internal-only assets (don't ship to the public deploy)
-beta/
-_design_system/
-_build_ct_anatomy_real.py
+# Internal artifacts that should never reach the public deploy.
 
-# Render-pipeline source files (the deployed site uses the PNGs only)
+# Mirror of the canonical site used for local-only review
+beta/
+
+# Design-system generator (internal team tool)
+_design_system/
+
+# CT-anatomy + Blender pipeline source files. The site uses the JSONs /
+# JPEGs / PNGs that result from these scripts, never the scripts themselves.
+_build_ct_anatomy_real.py
 renders/needlegps_explode.blend
 renders/build_explode.py
 renders/run_batches.sh
-renders/blender_log_test.txt
 renders/blender_log.txt
+renders/blender_log_test.txt
 renders/README.md
 renders/BLENDER_NOT_FOUND.md
-
-# CT-anatomy build artifacts (the deployed site uses the .json only)
-ct_anatomy_real.README.md
 ct_anatomy.README.md
+ct_anatomy_real.README.md
+
+# Deck-render extraction artifacts (only the optimised JPGs ship)
+assets/deck-renders/_extract.py
+assets/deck-renders/MANIFEST.md
+assets/deck-renders/*.png
+assets/deck-renders/*.jpeg
+assets/deck-renders/*-fullpage-ref.png
+assets/deck-renders/*-embedded.png
+assets/deck-renders/*-hires.png
+
+# (intentionally no logo exclusions — assets/logos/needlegps-mark.png is the
+# brand mark used in the nav and footer and MUST ship)
 
 # OS / editor noise
 .DS_Store
 .vscode/
+.idea/
 *.swp
+*~
+*.bak
+
+# Local environment / secrets
+.env
+.env.local
+*.pem
+*.key
+
+# Backup of build scripts (paranoia)
+*.sh.bak

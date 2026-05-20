@@ -13,11 +13,11 @@
 
 <meta http-equiv="Content-Security-Policy"
       content="default-src 'self';
-               script-src 'self' 'unsafe-inline';
+               script-src 'self' 'unsafe-inline' https://www.googletagmanager.com;
                style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
                font-src 'self' https://fonts.gstatic.com data:;
-               img-src 'self' data:;
-               connect-src 'self';
+               img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com;
+               connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com;
                frame-ancestors 'none';
                base-uri 'self';
                form-action 'self';
@@ -27,18 +27,27 @@
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 <meta name="color-scheme" content="light dark" />
 
-<title>NeedleGPS · Gold Standard Navigation for CT-Guided Interventions</title>
-<meta name="description" content="NeedleGPS is a handheld navigation device for CT-guided needle procedures. Faster, more accurate insertions with fewer reinsertions and complications." />
+<!-- Privacy hardening: tell every crawler/archiver to skip this site.
+     Pages is private and gated; this prevents indexing in case the URL
+     leaks. -->
+<meta name="robots"    content="noindex,nofollow,noarchive,nocache,nosnippet,noimageindex" />
+<meta name="googlebot" content="noindex,nofollow,noarchive,nocache,nosnippet,noimageindex" />
+<meta name="bingbot"   content="noindex,nofollow,noarchive,nocache,nosnippet,noimageindex" />
 
-<meta property="og:title" content="NeedleGPS · Gold Standard Navigation for CT-Guided Interventions" />
-<meta property="og:description" content="Handheld targeting device, sterile single-use consumable, and planning software for CT-guided needle procedures." />
+<title>Private preview</title>
+<meta name="description" content="Access by invitation only." />
+
+<!-- OpenGraph / Twitter deliberately generic: this is an invite-only preview.
+     Rich link previews (Slack, X, iMessage) won't leak brand imagery, the
+     device concept, or any team / IP detail when the URL is pasted. -->
+<meta property="og:title" content="Private preview" />
+<meta property="og:description" content="Access by invitation only." />
 <meta property="og:type" content="website" />
-<meta name="twitter:card" content="summary_large_image" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=20260520-g" />
+<link rel="stylesheet" href="styles.css?v=20260520-h" />
 </head>
 <body>
 
@@ -257,7 +266,7 @@
         </p>
       </div>
       <figure class="device-figure">
-        <img src="assets/deck-renders/slide-08-device.jpg?v=20260520-g"
+        <img src="assets/deck-renders/slide-08-device.jpg?v=20260520-h"
              alt="NeedleGPS device rendering with labeled components: rounded bevel flush to screen, touchscreen bubble level, status LED, side button, grip bands, tapered housing, coaxial needle mount, and central guidance needle."
              loading="lazy" decoding="async" />
         <figcaption>Commercial device concept</figcaption>
@@ -379,7 +388,7 @@
         with a working prototype and a prepared FDA pre-submission package.
       </p>
       <figure class="history-figure">
-        <img src="assets/deck-renders/slide-13-traction.jpg?v=20260520-g"
+        <img src="assets/deck-renders/slide-13-traction.jpg?v=20260520-h"
              alt="NeedleGPS prototype device and sterile consumable on a workbench, with annotated internal components: GPS / GNSS module, antenna array, battery, cam-lock interface."
              loading="lazy" decoding="async" />
         <figcaption>Prototype hardware</figcaption>
@@ -555,9 +564,10 @@
 </footer>
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-<script src="gate.js?v=20260520-g" defer></script>
-<script src="nav.js?v=20260520-g" defer></script>
-<script src="particles.js?v=20260520-g" defer></script>
-<script src="blowup.js?v=20260520-g" defer></script>
+<script src="gate.js?v=20260520-h" defer></script>
+<script src="analytics.js?v=20260520-h" defer></script>
+<script src="nav.js?v=20260520-h" defer></script>
+<script src="particles.js?v=20260520-h" defer></script>
+<script src="blowup.js?v=20260520-h" defer></script>
 </body>
 </html>

@@ -649,7 +649,11 @@
 
   // ---- animation ----
   let lastT = performance.now();
-  let formed = 0;          // 0..1 swarm-into-place progress
+  // Particles already spawn at their target positions (see buildScene),
+  // so there's no swarm-in to fade. Start `formed` at 1 so dots render at
+  // full opacity from the very first frame — no perceptible "dots didn't
+  // start yet" pause when the user lands on the page.
+  let formed = 1;          // 0..1 swarm-into-place progress
   let deviceYaw = 0;       // rotation around vertical axis
   let sliceClock = 0;      // 0..N progress through slice cycle
   let rafId = null;

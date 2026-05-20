@@ -724,6 +724,20 @@ h1, h2, h3, h4 {
   background-size: 100% 100%;
 }
 .team-link strong { font-weight: 600; }
+.team-affiliations-label {
+  margin-top: 8px; margin-bottom: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--c-secondary);
+  display: inline-flex; align-items: center; gap: 12px;
+}
+.team-affiliations-label::before,
+.team-affiliations-label::after {
+  content: ''; width: 18px; height: 1px;
+  background: var(--ink-line);
+}
 .team-affiliations {
   display: inline-flex; flex-wrap: wrap; gap: 28px 44px;
   justify-content: center;

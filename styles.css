@@ -575,29 +575,27 @@ h1, h2, h3, h4 {
 @media (max-width: 900px) { .tech-grid { grid-template-columns: 1fr; } }
 
 /* ---- deck-render figures ---- */
-/* The device section uses the labeled commercial-concept rendering from
-   deck slide 8; the history section uses the prototype + consumable shot
-   from slide 13. Both are centered, capped at a comfortable max-height,
-   with a small caption underneath in mono uppercase. */
+/* Restrained sizing so the renders complement the surrounding type
+   instead of dominating the section. Smaller than the original placement
+   pass; capped tighter on the history image since slide 13 is a
+   denser composition. */
 .device-figure,
 .history-figure {
-  margin: 56px auto 0;
-  max-width: 1100px;
+  margin: 48px auto 0;
   text-align: center;
 }
 .device-figure img,
 .history-figure img {
-  width: 100%; max-width: 100%; height: auto; display: block;
+  width: 100%; height: auto; display: block;
   margin: 0 auto;
   border-radius: 14px;
-  /* slide 13's render has a dark studio background; the soft shadow lifts
-     it off the page without competing with the image's own depth. */
-  box-shadow: 0 30px 80px -40px rgba(11, 27, 43, 0.30);
+  box-shadow: 0 24px 60px -36px rgba(11, 27, 43, 0.25);
 }
-.history-figure img { max-width: 760px; }
+.device-figure img  { max-width: 620px; }
+.history-figure img { max-width: 380px; }
 .device-figure figcaption,
 .history-figure figcaption {
-  margin-top: 18px;
+  margin-top: 16px;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
   color: var(--ink-mute);

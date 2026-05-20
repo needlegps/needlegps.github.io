@@ -408,41 +408,51 @@ h1, h2, h3, h4 {
   color: var(--ink-soft);
   white-space: nowrap;
 }
-/* Each institution rendered as a uniform-size pseudo-logo tile. Real
-   trademarks are not used (would require permission); instead each
-   wordmark uses its institution's archetypal typography + colour. All
-   tiles share the same height and a similar visual weight so the row
-   reads as a "logo bar" rather than a list of names. */
+/* Each institution rendered as a real logo on top + name underneath. We
+   fix the logo HEIGHT (not width) so each glyph is rendered at the same
+   visual weight despite very different SVG aspect ratios — Harvard's
+   wordmark is ~6:1, MGH is ~1:1, MIT is ~3.5:1, etc. The container
+   widens to fit; CSS gap holds the name a fixed distance below.
+   No cropping. */
 .marquee-row li {
   list-style: none;
-  height: 56px;
-  min-width: 180px;
-  padding: 0 28px;
   display: inline-flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
-  background: rgba(11, 27, 43, 0.04);
-  border: 1px solid rgba(11, 27, 43, 0.06);
-  font-size: 17px;
-  font-weight: 700;
-  letter-spacing: -0.012em;
+  gap: 12px;
+  height: 108px;
+  min-width: 180px;
+  padding: 12px 24px;
   white-space: nowrap;
-  transition: background 0.2s, border-color 0.2s, transform 0.2s;
-}
-.marquee-row li:hover {
-  background: rgba(11, 27, 43, 0.07);
-  transform: translateY(-1px);
+  /* No background pill — the logos read better against the marquee bg
+     directly, no boxed-in look. */
 }
 .marquee-row li::after { content: none; }
+.marquee-row li img {
+  display: block;
+  height: 38px;
+  width: auto;
+  max-width: 180px;
+  object-fit: contain;
+  /* Slight desaturation so all logos read as a unified row even though
+     they're different brand colours. Hover would re-saturate, but we
+     don't hover on a marquee item. */
+  filter: saturate(0.55) opacity(0.86);
+  transition: filter 0.2s;
+}
+.marquee-row li:hover img { filter: saturate(1) opacity(1); }
+.marquee-row li span {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
 
-.logo-ucsf     { font-family: 'Times New Roman', 'Georgia', serif; color: #052049; font-weight: 700; letter-spacing: 0.01em; }
-.logo-hms      { font-family: 'Times New Roman', 'Georgia', serif; color: #A41E36; font-weight: 700; font-style: italic; letter-spacing: 0.005em; }
-.logo-mgh      { font-family: 'Inter', sans-serif; color: #003B70; font-weight: 800; letter-spacing: -0.01em; }
-.logo-mit      { font-family: 'Times New Roman', 'Georgia', serif; color: #A31F34; font-weight: 800; letter-spacing: 0.06em; }
-.logo-berkeley { font-family: 'Inter', sans-serif; color: #003262; font-weight: 800; letter-spacing: -0.01em; }
-.logo-berkeley::first-letter { color: #FDB515; }
-.logo-nsf      { font-family: 'Inter', sans-serif; color: #1E4D90; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; font-size: 15px; }
+/* The marquee track is taller now to fit the logos + names */
+.marquee { padding: 56px 0 64px; }
 @keyframes marquee {
   from { transform: translate3d(0, 0, 0); }
   to   { transform: translate3d(-50%, 0, 0); }

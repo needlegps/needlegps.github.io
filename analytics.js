@@ -15,7 +15,7 @@
 // no requests are sent — the file is a no-op until you fill in the ID.
 
 (() => {
-  const NGPS_GA_ID = 'G-PLACEHOLDER'; // <-- replace with your GA4 measurement ID
+  const NGPS_GA_ID = 'G-PWLLG1Y8QP'; // NeedleGPS GA4 measurement ID (stream 14915813152)
 
   if (!NGPS_GA_ID || NGPS_GA_ID === 'G-PLACEHOLDER') return;
 

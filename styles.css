@@ -574,6 +574,35 @@ h1, h2, h3, h4 {
 
 @media (max-width: 900px) { .tech-grid { grid-template-columns: 1fr; } }
 
+/* ---- deck-render figures ---- */
+/* The device section uses the labeled commercial-concept rendering from
+   deck slide 8; the history section uses the prototype + consumable shot
+   from slide 13. Both are centered, capped at a comfortable max-height,
+   with a small caption underneath in mono uppercase. */
+.device-figure,
+.history-figure {
+  margin: 56px auto 0;
+  max-width: 1100px;
+  text-align: center;
+}
+.device-figure img,
+.history-figure img {
+  width: 100%; max-width: 100%; height: auto; display: block;
+  margin: 0 auto;
+  border-radius: 14px;
+  /* slide 13's render has a dark studio background; the soft shadow lifts
+     it off the page without competing with the image's own depth. */
+  box-shadow: 0 30px 80px -40px rgba(11, 27, 43, 0.30);
+}
+.history-figure img { max-width: 760px; }
+.device-figure figcaption,
+.history-figure figcaption {
+  margin-top: 18px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
 /* ---- blowup ---- */
 /* Black studio backdrop so the Blender frame (which renders against a near-
    black studio gradient) blends into the page seamlessly — no visible image

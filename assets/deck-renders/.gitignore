@@ -1,0 +1,5 @@
+# Internal extraction artifacts; only the optimised JPGs ship.
+*.png
+*.jpeg
+_extract.py
+MANIFEST.md

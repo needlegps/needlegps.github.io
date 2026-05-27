@@ -288,7 +288,15 @@ h1, h2, h3, h4 {
   font-weight: 400;
 }
 
-.hero-eyebrow { justify-content: center; }
+.hero-eyebrow {
+  justify-content: center;
+  /* Hero-only override: noticeably larger AND bolder than the other
+     eyebrows on the page. This is the first label a visitor reads, so it
+     carries the extra weight. Other eyebrows stay at the body 13px / 500. */
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+}
 
 .cta-row { display: inline-flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
 .btn {

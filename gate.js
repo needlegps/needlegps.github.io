@@ -19,6 +19,13 @@
   const STORAGE_KEY = 'ngps-gate-passed';
   const STORAGE_VAL = '20260519-i';
 
+  // The gate is intentionally only active on the github.io preview URL.
+  // On the public custom domain (needlegps.com / www.needlegps.com) the
+  // site is meant to be open and we skip the gate entirely.
+  const host = location.hostname.toLowerCase();
+  const PUBLIC_HOSTS = ['needlegps.com', 'www.needlegps.com'];
+  if (PUBLIC_HOSTS.includes(host)) return;
+
   // already unlocked in this browser?
   if (sessionStorage.getItem(STORAGE_KEY) === STORAGE_VAL) return;
 

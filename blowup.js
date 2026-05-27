@@ -377,7 +377,7 @@
 
   function drawFrames() {
     // Pick the frame matching scroll progress and draw it into a zone that
-    // sits clear of the head (top 26%) and the progress bar (bottom 10%).
+    // sits clear of the head (top) and the legend + progress bar (bottom).
     // Letterbox-fit, centered horizontally. We also stash the drawn rect on
     // `renderRect` so label placement can anchor to the rendered image.
     if (!frameImgs) return;
@@ -387,13 +387,14 @@
     if (!img) return;
 
     ctx.clearRect(0, 0, W, H);
-    // Render zone — deliberately pushed further down (was 0.26) so the
-    // head + subhead has room to breathe above the device. Bottom edge
-    // sits above the progress bar.
-    const zoneTop    = H * 0.36;
-    const zoneBottom = H * 0.90;
+    // On mobile (<=540 css px) we reserve the bottom ~38% of the canvas for
+    // the static label legend + progress bar; desktop keeps the wider
+    // vertical zone since labels float around the device instead.
+    const isMobile = W <= 540;
+    const zoneTop    = H * 0.32;
+    const zoneBottom = H * (isMobile ? 0.62 : 0.90);
     const zoneH      = zoneBottom - zoneTop;
-    const zoneW      = W * 0.70;
+    const zoneW      = W * (isMobile ? 0.92 : 0.70);
     const scale = Math.min(zoneW / frameW, zoneH / frameH);
     const dw = frameW * scale, dh = frameH * scale;
     const dx = (W - dw) / 2;

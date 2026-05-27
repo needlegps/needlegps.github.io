@@ -30,10 +30,13 @@
     return;
   }
 
-  // The gate is no longer in place, so analytics fire immediately on every
-  // page load. (If the gate is re-enabled in the future, set this to the
-  // sessionStorage-based check that was here previously.)
-  function gatePassed() { return true; }
+  // The gate is in place on the GitHub Pages preview. Analytics only fire
+  // after the visitor has passed the passphrase gate, so random crawls /
+  // accidental loads don't pollute the funnel.
+  function gatePassed() {
+    try { return sessionStorage.getItem('ngps-gate-passed') !== null; }
+    catch (_) { return false; }
+  }
 
   function injectGA() {
     // gtag.js loader

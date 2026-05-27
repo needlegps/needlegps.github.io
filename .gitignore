@@ -6,6 +6,9 @@ beta/
 # Design-system generator (internal team tool)
 _design_system/
 
+# Logo A/B candidates (internal review only, not for public site)
+_logo_options/
+
 # CT-anatomy + Blender pipeline source files. The site uses the JSONs /
 # JPEGs / PNGs that result from these scripts, never the scripts themselves.
 _build_ct_anatomy_real.py

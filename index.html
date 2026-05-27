@@ -46,7 +46,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=20260520-j" />
+<link rel="stylesheet" href="styles.css?v=20260521-a" />
 </head>
 <body>
 
@@ -190,7 +190,7 @@
         <h2>A bubble level, re-engineered for the CT suite.</h2>
         <p class="section-sub">
           Three components. One workflow. The device receives a target angle
-          from the CT planning software or accepts one tapped in by hand, then
+          from the CT planning software or via manual entry, then
           guides the clinician to that angle with visual and haptic feedback
           in real time.
         </p>
@@ -265,7 +265,7 @@
         </p>
       </div>
       <figure class="device-figure">
-        <img src="assets/deck-renders/slide-08-device.jpg?v=20260520-j"
+        <img src="assets/deck-renders/slide-08-device.jpg?v=20260521-a"
              alt="NeedleGPS device rendering with labeled components: rounded bevel flush to screen, touchscreen bubble level, status LED, side button, grip bands, tapered housing, coaxial needle mount, and central guidance needle."
              loading="lazy" decoding="async" />
         <figcaption>Commercial device concept</figcaption>
@@ -387,10 +387,10 @@
         with a working prototype and a prepared FDA pre-submission package.
       </p>
       <figure class="history-figure">
-        <img src="assets/deck-renders/slide-13-traction.jpg?v=20260520-j"
+        <img src="assets/deck-renders/slide-13-traction.jpg?v=20260521-a"
              alt="NeedleGPS prototype device and sterile consumable on a workbench, with annotated internal components: GPS / GNSS module, antenna array, battery, cam-lock interface."
              loading="lazy" decoding="async" />
-        <figcaption>Prototype hardware</figcaption>
+        <figcaption>Functional prototype hardware</figcaption>
       </figure>
     </div>
   </section>
@@ -418,12 +418,18 @@
         neuroradiologists at UCSF, with PhD training in physics and
         engineering at UC Berkeley, UC Santa Cruz, and MIT-affiliated
         programs.
-        Clinical co-founder
+        Clinical co-founders include
         <a class="team-link"
            href="https://radiology.ucsf.edu/people/brian-haas"
-           target="_blank" rel="noopener noreferrer"><strong>Dr.&nbsp;Brian&nbsp;Haas</strong></a>
-        is a thoracic radiologist at UCSF and San Francisco General Hospital
-        (SFGH). Clinical development and clinical trials are run by
+           target="_blank" rel="noopener noreferrer"><strong>Dr.&nbsp;Brian&nbsp;Haas</strong></a>,
+        a thoracic radiologist at UCSF and San Francisco General Hospital
+        (SFGH), and
+        <a class="team-link"
+           href="https://radiology.ucsf.edu/people/lohith-kini"
+           target="_blank" rel="noopener noreferrer"><strong>Dr.&nbsp;Lohith&nbsp;Kini, MD,&nbsp;PhD</strong></a>,
+        a UCSF Radiology resident currently in interventional neuroradiology
+        (Penn&nbsp;MD/PhD). Clinical development and clinical trials are run
+        by
         <a class="team-link"
            href="https://www.cntr.mgh.harvard.edu/our-team/peter-hadar,-md,-ms"
            target="_blank" rel="noopener noreferrer"><strong>Dr.&nbsp;Peter&nbsp;Hadar</strong></a>
@@ -564,10 +570,11 @@
 </footer>
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-<script src="gate.js?v=20260520-j" defer></script>
-<script src="analytics.js?v=20260520-j" defer></script>
-<script src="nav.js?v=20260520-j" defer></script>
-<script src="particles.js?v=20260520-j" defer></script>
-<script src="blowup.js?v=20260520-j" defer></script>
+<!-- gate.js removed: site is publicly viewable without a passphrase. The
+     file is kept in the repo for easy re-enable if we ever lock down again. -->
+<script src="analytics.js?v=20260521-a" defer></script>
+<script src="nav.js?v=20260521-a" defer></script>
+<script src="particles.js?v=20260521-a" defer></script>
+<script src="blowup.js?v=20260521-a" defer></script>
 </body>
 </html>

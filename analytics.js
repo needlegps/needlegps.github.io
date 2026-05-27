@@ -30,11 +30,10 @@
     return;
   }
 
-  // Only fire after the visitor has passed the preview gate.
-  function gatePassed() {
-    try { return sessionStorage.getItem('ngps-gate-passed') !== null; }
-    catch (_) { return false; }
-  }
+  // The gate is no longer in place, so analytics fire immediately on every
+  // page load. (If the gate is re-enabled in the future, set this to the
+  // sessionStorage-based check that was here previously.)
+  function gatePassed() { return true; }
 
   function injectGA() {
     // gtag.js loader

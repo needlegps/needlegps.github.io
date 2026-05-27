@@ -36,7 +36,7 @@
   --t-lede:    clamp(17px, 1.55vw, 21px);
   --t-body:    16px;
   --t-small:   14px;
-  --t-eyebrow: 11px;
+  --t-eyebrow: 13px;
 
   --max: 1240px;
 }
@@ -142,7 +142,8 @@ h1, h2, h3, h4 {
 .eyebrow {
   font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
   font-size: var(--t-eyebrow);
-  letter-spacing: 0.28em;
+  font-weight: 500;          /* heavier — the 400 read too thin at small sizes */
+  letter-spacing: 0.18em;    /* tighter — wide tracking + thin weight hurt legibility */
   text-transform: uppercase;
   color: var(--c-primary);
   display: inline-flex;

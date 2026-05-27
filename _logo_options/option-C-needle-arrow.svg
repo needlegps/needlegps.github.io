@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Option C — Needle arrow into target.
+     Single bold diagonal line (the needle) ending at a small filled dot
+     (the target), with a thin ring around the target showing the bullseye.
+     Reads as "guided to the target" with one continuous line. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="NeedleGPS">
+  <g fill="none" stroke="#0E2030" stroke-width="2.4" stroke-linecap="round">
+    <circle cx="40" cy="38" r="12"/>
+    <line x1="10" y1="8" x2="40" y2="38"/>
+  </g>
+  <circle cx="40" cy="38" r="3.4" fill="#0E2030"/>
+</svg>

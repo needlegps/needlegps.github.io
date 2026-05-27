@@ -758,13 +758,15 @@
       }
     }
 
-    // Loose spring + curl-noise drift. Stiffness stays low so particles
-    // "breathe" around their targets, but damping is bumped from 0.93 to
-    // 0.96 to kill the bounciness the user reported (chest + device were
-    // both overshooting visibly on slow movements / slice transitions).
+    // Spring physics. `damp` is a velocity-multiplier per frame; values
+    // closer to 1 mean LESS friction (more bounce), closer to 0 mean MORE
+    // friction (less bounce). 0.85 is well into the over-damped regime
+    // so particles glide to their targets instead of oscillating.
+    // (Earlier 0.93/0.96 values were too lightly damped — the user
+    // reported the bouncy feel both times.)
     const tNow = now * 0.001;
     const ks = 1.7;
-    const damp = 0.96;
+    const damp = 0.85;
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
       const dx = p.tx - p.x, dy = p.ty - p.y;

@@ -287,8 +287,12 @@
     if (!labelsRoot) return;
     const labels = labelsRoot.querySelectorAll('.b-label');
     const eased = easeOut(prog);
-    // fade in across mid-scroll for both modes
-    const fade = clamp((prog - 0.15) / 0.5, 0, 1);
+    // Labels are always visible once the section is in view. The earlier
+    // scroll-progress-based fade meant labels were invisible at the top
+    // of the section and only appeared after the user had scrolled deep
+    // into it — the user reported "no labels at all," which matched
+    // that behavior on short scrolls. Now: visible immediately.
+    const fade = 1;
 
     if (renderMode === 'frames' && renderRect) {
       // Position labels along the vertical span of the actual rendered

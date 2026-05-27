@@ -664,16 +664,15 @@ h1, h2, h3, h4 {
 .b-label.right { transform: translate(0, -50%); }
 .b-label.left  { transform: translate(-100%, -50%); flex-direction: row-reverse; }
 
-/* Mobile: the side-pinned labels run off the screen on narrow viewports
-   (the user reported seeing fragments like "ING ELL ELD"). Hide them
-   entirely below 760px — the rendered device itself stays visible and
-   readable; labels are nice-to-have, not critical. */
-@media (max-width: 760px) {
+/* Mobile (small phones): the side-pinned labels run off the screen so we
+   hide them entirely below 540px. iPads (768) and any non-maximised
+   desktop browser keep the labels. The rendered device itself stays
+   visible regardless; labels are nice-to-have. */
+@media (max-width: 540px) {
   .blowup-labels { display: none; }
-  .blowup-head {
-    top: 28px;
-    padding: 0 18px;
-  }
+}
+@media (max-width: 760px) {
+  .blowup-head { top: 28px; padding: 0 18px; }
   .blowup-head h2 { font-size: 20px; }
   .blowup-head p  { font-size: 13px; }
 }

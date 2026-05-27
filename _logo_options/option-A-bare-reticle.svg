@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Option A — Bare reticle.
+     Three concentric circles + center dot. The most stripped-down version
+     of the current mark. No needle, no compass needle, no shield. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="NeedleGPS">
+  <g fill="none" stroke="#0E2030" stroke-width="2.4">
+    <circle cx="32" cy="32" r="26"/>
+    <circle cx="32" cy="32" r="16"/>
+    <circle cx="32" cy="32" r="6"/>
+  </g>
+  <circle cx="32" cy="32" r="2.6" fill="#0E2030"/>
+</svg>

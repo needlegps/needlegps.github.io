@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Option D — Bubble level.
+     Outer ring with an offset inner circle representing the bubble's
+     position. Nods to the device's actual physical metaphor (a bubble
+     level for needle angle) without showing a needle. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="NeedleGPS">
+  <circle cx="32" cy="32" r="26" fill="none" stroke="#0E2030" stroke-width="2.4"/>
+  <circle cx="32" cy="32" r="12" fill="none" stroke="#0E2030" stroke-width="2"/>
+  <circle cx="35.5" cy="29" r="5" fill="#0E2030"/>
+</svg>

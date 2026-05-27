@@ -664,12 +664,37 @@ h1, h2, h3, h4 {
 .b-label.right { transform: translate(0, -50%); }
 .b-label.left  { transform: translate(-100%, -50%); flex-direction: row-reverse; }
 
-/* Mobile (small phones): the side-pinned labels run off the screen so we
-   hide them entirely below 540px. iPads (768) and any non-maximised
-   desktop browser keep the labels. The rendered device itself stays
-   visible regardless; labels are nice-to-have. */
+/* Mobile (small phones): the side-pinned labels run off the screen, so
+   on ≤540px we re-style them as a static legend at the bottom of the
+   sticky canvas — every part name visible, no positioning around the
+   exploding device. JS still sets el.style.{left,top,opacity}, but we
+   neutralize those with !important. */
 @media (max-width: 540px) {
-  .blowup-labels { display: none; }
+  .blowup-labels {
+    position: absolute;
+    left: 50%; bottom: 84px;            /* sits above the progress bar */
+    transform: translateX(-50%) !important;
+    width: 92vw; max-width: 480px;
+    display: flex; flex-direction: column; gap: 6px;
+    z-index: 3; pointer-events: none;
+  }
+  .b-label {
+    position: static !important;
+    transform: none !important;
+    opacity: 1 !important;
+    flex-direction: row !important;
+    justify-content: center;
+    gap: 6px;
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    white-space: normal;
+    padding: 2px 0;
+  }
+  .b-label .b-rule { display: none !important; }
+  .b-label .b-dot {
+    width: 4px; height: 4px;
+    box-shadow: 0 0 6px var(--c-primary);
+  }
 }
 @media (max-width: 760px) {
   .blowup-head { top: 28px; padding: 0 18px; }

@@ -758,20 +758,22 @@
       }
     }
 
-    // Loose spring + curl-noise drift. Stiffness is intentionally low so
-    // particles "breathe" around their targets instead of locking on.
-    // Chest particles SKIP the spring — they snap to slice targets so
-    // particles vanish at one slice and reappear at the next (vs morphing).
+    // Loose spring + curl-noise drift. Stiffness stays low so particles
+    // "breathe" around their targets, but damping is bumped from 0.93 to
+    // 0.96 to kill the bounciness the user reported (chest + device were
+    // both overshooting visibly on slow movements / slice transitions).
     const tNow = now * 0.001;
     const ks = 1.7;
-    const damp = 0.93;
+    const damp = 0.96;
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
       const dx = p.tx - p.x, dy = p.ty - p.y;
       p.vx = (p.vx + dx * ks * dt) * damp;
       p.vy = (p.vy + dy * ks * dt) * damp;
       if (!reduceMotion && formed > 0.6) {
-        const drift = 0.55 * p.amp;
+        // Drift halved (0.55 -> 0.30) so particles don't push hard enough
+        // against the spring to start oscillating.
+        const drift = 0.30 * p.amp;
         const [fx, fy] = flow(p.x, p.y, tNow * p.freq + p.phase);
         p.vx += fx * drift * dt;
         p.vy += fy * drift * dt;

@@ -664,6 +664,20 @@ h1, h2, h3, h4 {
 .b-label.right { transform: translate(0, -50%); }
 .b-label.left  { transform: translate(-100%, -50%); flex-direction: row-reverse; }
 
+/* Mobile: the side-pinned labels run off the screen on narrow viewports
+   (the user reported seeing fragments like "ING ELL ELD"). Hide them
+   entirely below 760px — the rendered device itself stays visible and
+   readable; labels are nice-to-have, not critical. */
+@media (max-width: 760px) {
+  .blowup-labels { display: none; }
+  .blowup-head {
+    top: 28px;
+    padding: 0 18px;
+  }
+  .blowup-head h2 { font-size: 20px; }
+  .blowup-head p  { font-size: 13px; }
+}
+
 /* ---- data callouts ---- */
 .data-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
 .data-card {
@@ -748,15 +762,33 @@ h1, h2, h3, h4 {
   background: var(--ink-line);
 }
 .team-affiliations {
-  display: inline-flex; flex-wrap: wrap; gap: 28px 44px;
+  display: flex; flex-wrap: wrap; row-gap: 14px; column-gap: 22px;
   justify-content: center;
   color: var(--ink-mute);
   font-family: 'JetBrains Mono', monospace;
-  font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+  font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+  max-width: 880px; margin-left: auto; margin-right: auto;
 }
-.team-affiliations span { white-space: nowrap; }
-.team-affiliations span + span::before {
-  content: '·'; margin-right: 28px; color: var(--c-primary);
+.team-affiliations span {
+  white-space: nowrap;
+  display: inline-flex; align-items: center;
+}
+/* The separator dot lives on every item EXCEPT the last via ::after,
+   so when the row wraps to a new line the dot is on the previous line
+   (not orphaned at the start of the new line). */
+.team-affiliations span:not(:last-child)::after {
+  content: '';
+  display: inline-block;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--c-primary);
+  margin-left: 22px;
+  vertical-align: middle;
+  opacity: 0.7;
+}
+@media (max-width: 640px) {
+  .team-affiliations { font-size: 11px; letter-spacing: 0.14em; column-gap: 16px; }
+  .team-affiliations span:not(:last-child)::after { margin-left: 16px; }
 }
 
 .team-footnote {

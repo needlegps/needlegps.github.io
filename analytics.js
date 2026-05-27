@@ -30,10 +30,14 @@
     return;
   }
 
-  // The gate is in place on the GitHub Pages preview. Analytics only fire
-  // after the visitor has passed the passphrase gate, so random crawls /
-  // accidental loads don't pollute the funnel.
+  // On the public custom domain (needlegps.com / www.needlegps.com) the
+  // gate is intentionally skipped, so analytics fire immediately. On the
+  // *.github.io preview URL, analytics only fire after the visitor has
+  // typed the passphrase. This mirrors gate.js's hostname check exactly.
+  const PUBLIC_HOSTS = ['needlegps.com', 'www.needlegps.com'];
+  const isPublicHost = PUBLIC_HOSTS.includes(location.hostname.toLowerCase());
   function gatePassed() {
+    if (isPublicHost) return true;
     try { return sessionStorage.getItem('ngps-gate-passed') !== null; }
     catch (_) { return false; }
   }
